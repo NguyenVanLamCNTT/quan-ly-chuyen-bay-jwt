@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    image: 'demogk:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_URL=jdbc:postgresql://db:5432/demo
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=sapassword
+          
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=sapassword
+      - POSTGRES_DB=demo
